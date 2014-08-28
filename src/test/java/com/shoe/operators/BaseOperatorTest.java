@@ -45,5 +45,9 @@ public abstract class BaseOperatorTest {
         assertIsRegistered(expectedName());
     }
 
-    public abstract String expectedName();
+    public String expectedName() {
+        String baseName = getClass().getSimpleName().replaceAll("Test$", "");
+        return Introspector.decapitalize(baseName);
+
+    }
 }

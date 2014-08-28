@@ -8,7 +8,7 @@ import static org.junit.Assert.assertThat;
 public class AddTest extends BaseOperatorTest {
     @Override
     public String expectedName() {
-        return "+";
+        return "add";
     }
 
     @Test

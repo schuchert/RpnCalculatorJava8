@@ -18,7 +18,7 @@ public class OperatorFactoryTest {
 
     @Test(expected = AlreadyRegisteredException.class)
     public void shouldNotallowRegistrationOfSameOperatorName() {
-        factory.register("+", values-> {});
+        factory.register("add", values-> {});
     }
 
     @Test(expected = IllegalArgumentException.class)

@@ -46,7 +46,7 @@ public class CalculatorTest {
     public void shouldBeAbleToProgramCalculator() {
         calculator.start();
         calculator.enter(2);
-        calculator.execute("*");
+        calculator.execute("multiply");
         calculator.save("2x");
         calculator.enter(4);
         calculator.execute("2x");
@@ -56,9 +56,9 @@ public class CalculatorTest {
     @Test
     public void shouldExecuteOperatorsInOrderProvided() {
         calculator.start();
-        calculator.execute("+");
-        calculator.execute("*");
-        calculator.execute("-");
+        calculator.execute("add");
+        calculator.execute("multiply");
+        calculator.execute("subtract");
         calculator.save("ams");
         calculator.enter(3);
         calculator.enter(5);
