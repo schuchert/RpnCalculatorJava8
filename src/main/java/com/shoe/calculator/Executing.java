@@ -1,5 +1,7 @@
 package com.shoe.calculator;
 
+import com.shoe.operators.PushValue;
+
 import java.math.BigDecimal;
 
 public class Executing implements CalculatorState {
@@ -29,6 +31,6 @@ public class Executing implements CalculatorState {
 
     @Override
     public void save(Calculator calculator, String name) {
-        throw new IllegalStateException("Save can only be called after start");
+        factory.register(name, new PushValue(values.pop()));
     }
 }

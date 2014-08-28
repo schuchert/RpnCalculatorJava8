@@ -52,7 +52,9 @@ public class OperatorFactory {
             throw new IllegalArgumentException("Operator names must be at least 1 character long");
         }
         if (operators.get(name) != null) {
-            throw new AlreadyRegisteredException(name);
+            if (operators.get(name).getClass() != op.getClass()) {
+                throw new AlreadyRegisteredException(name);
+            }
         }
         if (op == null) {
             throw new IllegalArgumentException("Operator cannot be null");
@@ -65,7 +67,7 @@ public class OperatorFactory {
             operator = attemptToBuildCompositeOperator(s);
         }
 
-        if(operator == null) {
+        if (operator == null) {
             throw new IllegalArgumentException(String.format("Operator %s does not exist.", s));
         }
 

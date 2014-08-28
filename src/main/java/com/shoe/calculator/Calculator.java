@@ -40,7 +40,6 @@ public class Calculator {
 
     public void save(String operatorName) {
         state.save(this, operatorName);
-        toExecutionMode();
     }
 
     void toExecutionMode() {

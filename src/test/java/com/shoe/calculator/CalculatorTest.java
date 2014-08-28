@@ -18,10 +18,6 @@ public class CalculatorTest {
         calculator = new Calculator();
     }
 
-    static org.hamcrest.Matcher<BigDecimal> isBigDecimal(double value) {
-        return is(BigDecimal.valueOf(value));
-    }
-
     static org.hamcrest.Matcher<BigDecimal> isBigDecimal(long value) {
         return is(BigDecimal.valueOf(value));
     }
@@ -123,5 +119,64 @@ public class CalculatorTest {
         calculator.enter(2);
         calculator.execute("dropSome");
         assertThat(calculator.view(), isBigDecimal(3));
+    }
+
+    @Test
+    public void shouldBeAbleToProgramMinFunction() {
+        calculator.start();
+        calculator.enter(2);
+        calculator.execute("nDup");
+        calculator.execute("<");
+        calculator.execute("if");
+        calculator.execute("drop");
+        calculator.execute("else");
+        calculator.execute("swap");
+        calculator.execute("drop");
+        calculator.execute("end");
+        calculator.save("min");
+        calculator.enter(6);
+        calculator.enter(4);
+        calculator.execute("min");
+        assertThat(calculator.view(), isBigDecimal(4));
+    }
+
+    @Test
+    public void shouldBeAbleToSetVariables() {
+        calculator.enter(5);
+        calculator.save("i");
+        calculator.execute("i");
+        assertThat(calculator.view(), isBigDecimal(5));
+        calculator.execute("drop");
+        assertThat(calculator.view(), isBigDecimal(0));
+    }
+
+    @Test
+    public void shouldBeAbleToChangeVariables() {
+        calculator.enter(5);
+        calculator.save("i");
+        calculator.enter(13);
+        calculator.save("i");
+        calculator.execute("i");
+        assertThat(calculator.view(), isBigDecimal(13));
+    }
+
+    @Test
+    public void canRepeatBasedOnVariable() {
+        calculator.enter(3);
+        calculator.save("i");
+        calculator.start();
+        calculator.execute("i");
+        calculator.execute("repeat");
+        calculator.execute("drop");
+        calculator.execute("end");
+        calculator.save("repeatI");
+
+        calculator.enter(5);
+        calculator.enter(4);
+        calculator.enter(3);
+        calculator.enter(2);
+        calculator.enter(1);
+        calculator.execute("repeatI");
+        assertThat(calculator.view(), isBigDecimal(4));
     }
 }
