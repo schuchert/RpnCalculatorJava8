@@ -3,44 +3,19 @@ package com.shoe.calculator;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-
 import static com.shoe.calculator.TestUtilities.assertResultWas;
 import static com.shoe.calculator.TestUtilities.enter;
 
 public class ProgrammingTheCalculatorTest {
     private Calculator calculator;
-    private String program;
 
     @Before
     public void init() {
         calculator = new Calculator();
     }
 
-    ProgrammingTheCalculatorTest createProgram(String program) {
-        this.program = program;
-        return this;
-    }
-
-    void named(String name) {
-        createProgramNamed(program, name);
-    }
-
-    void createProgramNamed(String program, String name) {
-        String[] parts = program.split(" ");
-
-        calculator.start();
-
-        Arrays.stream(parts).forEach((String p) -> {
-            if (p.matches("\\d+")) {
-                calculator.enter(new BigDecimal(p));
-            } else {
-                calculator.execute(p);
-            }
-        });
-
-        calculator.save(name);
+    CalculatorProgrammer createProgram(String program) {
+        return new CalculatorProgrammer(calculator, program);
     }
 
     @Test
