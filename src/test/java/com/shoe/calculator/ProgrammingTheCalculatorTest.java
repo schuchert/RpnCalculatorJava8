@@ -11,6 +11,7 @@ import static org.junit.Assert.assertThat;
 
 public class ProgrammingTheCalculatorTest {
     private Calculator calculator;
+    private String program;
 
     @Before
     public void init() {
@@ -23,6 +24,15 @@ public class ProgrammingTheCalculatorTest {
 
     void enter(int... values) {
         Arrays.stream(values).forEach(calculator::enter);
+    }
+
+    ProgrammingTheCalculatorTest createProgram(String program) {
+        this.program = program;
+        return this;
+    }
+
+    void named(String name) {
+        createProgramNamed(program, name);
     }
 
     void createProgramNamed(String program, String name) {
@@ -41,57 +51,71 @@ public class ProgrammingTheCalculatorTest {
         calculator.save(name);
     }
 
+    void assertResultWas(int value) {
+        assertThat(calculator.view(), isBigDecimal(value));
+    }
+
     @Test
     public void shouldBeAbleToProgramCalculator() {
-        createProgramNamed("2 multiply", "2x");
+        createProgram("2 multiply").named("2x");
 
         calculator.enter(4);
         calculator.execute("2x");
-        assertThat(calculator.view(), isBigDecimal(8));
+
+        assertResultWas(8);
     }
 
     @Test
     public void shouldExecuteOperatorsInOrderProvided() {
-        createProgramNamed("add multiply subtract", "ams");
+        createProgram("add multiply subtract").named("ams");
 
         enter(3, 5, 2, 13);
         calculator.execute("ams");
-        assertThat(calculator.view(), isBigDecimal(-72));
+
+        assertResultWas(-72);
     }
 
     @Test
     public void shouldBeAbleToProgramAnIfStatement() {
-        createProgramNamed("if drop end", "dropIfTrue");
+        createProgram("if drop end").named("dropIfTrue");
+
         enter(1, 2, 1);
         calculator.execute("dropIfTrue");
-        assertThat(calculator.view(), isBigDecimal(1));
+
+        assertResultWas(1);
     }
 
     @Test
     public void shouldBeAbleToProgramIfThenElse() {
-        createProgramNamed("if drop else swap end", "ifThenElse");
+        createProgram("if drop else swap end").named("ifThenElse");
+
         enter(13, 1, 2, 1);
         calculator.execute("ifThenElse");
-        assertThat(calculator.view(), isBigDecimal(1));
+        assertResultWas(1);
+
         enter(13, 2, 0);
         calculator.execute("ifThenElse");
-        assertThat(calculator.view(), isBigDecimal(13));
+        assertResultWas(13);
     }
 
     @Test
     public void shouldBeAbleToRepeatABlock() {
-        createProgramNamed("repeat drop end", "dropSome");
+        createProgram("repeat drop end").named("dropSome");
+
         enter(4, 3, 2, 1, 2);
         calculator.execute("dropSome");
-        assertThat(calculator.view(), isBigDecimal(3));
+
+        assertResultWas(3);
     }
 
     @Test
     public void shouldBeAbleToProgramMinFunction() {
-        createProgramNamed("2 nDup < if drop else swap drop end", "min");
+        createProgram("2 nDup < if drop else swap drop end").named("min");
+
         enter(6, 4);
         calculator.execute("min");
-        assertThat(calculator.view(), isBigDecimal(4));
+
+        assertResultWas(4);
     }
 
     @Test
@@ -99,9 +123,9 @@ public class ProgrammingTheCalculatorTest {
         calculator.enter(5);
         calculator.save("i");
         calculator.execute("i");
-        assertThat(calculator.view(), isBigDecimal(5));
+        assertResultWas(5);
         calculator.execute("drop");
-        assertThat(calculator.view(), isBigDecimal(0));
+        assertResultWas(0);
     }
 
     @Test
@@ -111,17 +135,18 @@ public class ProgrammingTheCalculatorTest {
         calculator.enter(13);
         calculator.save("i");
         calculator.execute("i");
-        assertThat(calculator.view(), isBigDecimal(13));
+        assertResultWas(13);
     }
 
     @Test
     public void canRepeatBasedOnVariable() {
         calculator.enter(3);
         calculator.save("i");
-        createProgramNamed("i repeat drop end", "repeatI");
+
+        createProgram("i repeat drop end").named("repeatI");
 
         enter(5, 4, 3, 2, 1);
         calculator.execute("repeatI");
-        assertThat(calculator.view(), isBigDecimal(4));
+        assertResultWas(4);
     }
 }
