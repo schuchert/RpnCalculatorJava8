@@ -3,6 +3,7 @@ package com.shoe.operators;
 import com.shoe.calculator.RpnStack;
 import org.junit.Test;
 
+import static com.shoe.calculator.TestUtilities.isBigDecimal;
 import static org.junit.Assert.assertThat;
 
 public class NDupTest extends BaseOperatorTest {

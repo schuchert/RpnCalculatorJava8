@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.Iterator;
 
+import static com.shoe.calculator.TestUtilities.isBigDecimal;
 import static org.junit.Assert.assertThat;
 
 public class InsertTest extends BaseOperatorTest {
@@ -45,13 +46,13 @@ public class InsertTest extends BaseOperatorTest {
         assertThat(values.next(), isBigDecimal(41));
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldRejectInsertionWhenIndexOutOfBounds() {
         RpnStack stack = stackOf(3, 19);
         operator.accept(stack);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldRejectInsertionWhenStackIsSmallerThan3() {
         RpnStack stack = stackOf();
         operator.accept(stack);

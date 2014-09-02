@@ -6,8 +6,8 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static com.shoe.calculator.TestUtilities.assertResultWas;
+import static com.shoe.calculator.TestUtilities.enter;
 
 public class ProgrammingTheCalculatorTest {
     private Calculator calculator;
@@ -16,14 +16,6 @@ public class ProgrammingTheCalculatorTest {
     @Before
     public void init() {
         calculator = new Calculator();
-    }
-
-    static org.hamcrest.Matcher<BigDecimal> isBigDecimal(long value) {
-        return is(BigDecimal.valueOf(value));
-    }
-
-    void enter(int... values) {
-        Arrays.stream(values).forEach(calculator::enter);
     }
 
     ProgrammingTheCalculatorTest createProgram(String program) {
@@ -51,10 +43,6 @@ public class ProgrammingTheCalculatorTest {
         calculator.save(name);
     }
 
-    void assertResultWas(int value) {
-        assertThat(calculator.view(), isBigDecimal(value));
-    }
-
     @Test
     public void shouldBeAbleToProgramCalculator() {
         createProgram("2 multiply").named("2x");
@@ -62,60 +50,60 @@ public class ProgrammingTheCalculatorTest {
         calculator.enter(4);
         calculator.execute("2x");
 
-        assertResultWas(8);
+        assertResultWas(calculator, 8);
     }
 
     @Test
     public void shouldExecuteOperatorsInOrderProvided() {
         createProgram("add multiply subtract").named("ams");
 
-        enter(3, 5, 2, 13);
+        enter(calculator, 3, 5, 2, 13);
         calculator.execute("ams");
 
-        assertResultWas(-72);
+        assertResultWas(calculator, -72);
     }
 
     @Test
     public void shouldBeAbleToProgramAnIfStatement() {
         createProgram("if drop end").named("dropIfTrue");
 
-        enter(1, 2, 1);
+        enter(calculator, 1, 2, 1);
         calculator.execute("dropIfTrue");
 
-        assertResultWas(1);
+        assertResultWas(calculator, 1);
     }
 
     @Test
     public void shouldBeAbleToProgramIfThenElse() {
         createProgram("if drop else swap end").named("ifThenElse");
 
-        enter(13, 1, 2, 1);
+        enter(calculator, 13, 1, 2, 1);
         calculator.execute("ifThenElse");
-        assertResultWas(1);
+        assertResultWas(calculator, 1);
 
-        enter(13, 2, 0);
+        enter(calculator, 13, 2, 0);
         calculator.execute("ifThenElse");
-        assertResultWas(13);
+        assertResultWas(calculator, 13);
     }
 
     @Test
     public void shouldBeAbleToRepeatABlock() {
         createProgram("repeat drop end").named("dropSome");
 
-        enter(4, 3, 2, 1, 2);
+        enter(calculator, 4, 3, 2, 1, 2);
         calculator.execute("dropSome");
 
-        assertResultWas(3);
+        assertResultWas(calculator, 3);
     }
 
     @Test
     public void shouldBeAbleToProgramMinFunction() {
         createProgram("2 nDup < if drop else swap drop end").named("min");
 
-        enter(6, 4);
+        enter(calculator, 6, 4);
         calculator.execute("min");
 
-        assertResultWas(4);
+        assertResultWas(calculator, 4);
     }
 
     @Test
@@ -123,9 +111,8 @@ public class ProgrammingTheCalculatorTest {
         calculator.enter(5);
         calculator.save("i");
         calculator.execute("i");
-        assertResultWas(5);
-        calculator.execute("drop");
-        assertResultWas(0);
+        assertResultWas(calculator, 5);
+        assertResultWas(calculator, 0);
     }
 
     @Test
@@ -135,7 +122,7 @@ public class ProgrammingTheCalculatorTest {
         calculator.enter(13);
         calculator.save("i");
         calculator.execute("i");
-        assertResultWas(13);
+        assertResultWas(calculator, 13);
     }
 
     @Test
@@ -145,8 +132,8 @@ public class ProgrammingTheCalculatorTest {
 
         createProgram("i repeat drop end").named("repeatI");
 
-        enter(5, 4, 3, 2, 1);
+        enter(calculator, 5, 4, 3, 2, 1);
         calculator.execute("repeatI");
-        assertResultWas(4);
+        assertResultWas(calculator, 4);
     }
 }

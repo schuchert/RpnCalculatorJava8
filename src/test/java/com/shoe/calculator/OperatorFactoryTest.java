@@ -17,19 +17,21 @@ public class OperatorFactoryTest {
     }
 
     @Test(expected = AlreadyRegisteredException.class)
-    public void shouldNotallowRegistrationOfSameOperatorName() {
-        factory.register("add", values-> {});
+    public void shouldNotAllowRegistrationOfSameOperatorName() {
+        factory.register("add", values -> {
+        });
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldRequireOperatorNameBeNonNull() {
-        factory.register(null, values-> {});
+        factory.register(null, values -> {
+        });
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldRequireOperatorNameBeAtLeast1CharacterLong() {
-        factory.register("", values-> {});
-
+        factory.register("", values -> {
+        });
     }
 
     @Test(expected = IllegalArgumentException.class)

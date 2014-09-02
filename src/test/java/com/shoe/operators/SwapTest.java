@@ -5,6 +5,7 @@ import com.shoe.calculator.RpnStack;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.shoe.calculator.TestUtilities.isBigDecimal;
 import static org.junit.Assert.assertThat;
 
 public class SwapTest extends BaseOperatorTest {

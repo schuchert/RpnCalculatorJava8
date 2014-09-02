@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
+import static com.shoe.calculator.TestUtilities.isBigDecimal;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -46,19 +47,19 @@ public class ReplaceTest extends BaseOperatorTest {
         assertThat(values.peek(), isBigDecimal(13));
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldFailIfStackTooShort() {
         RpnStack values = stackOf(1, 3);
         operator.accept(values);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldFailIfIndexOutOfBounds() {
         RpnStack values = stackOf(11, 1, 4);
         operator.accept(values);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldFailIfIndexTooLarge() {
         RpnStack values = stackOf(11);
         values.push(new BigDecimal(Integer.MAX_VALUE));

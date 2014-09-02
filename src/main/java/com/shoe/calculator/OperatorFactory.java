@@ -24,7 +24,7 @@ public class OperatorFactory {
     private void handleCompositeOperators(Reflections reflections) {
         reflections.getSubTypesOf(CompositeOperator.class).stream().forEach(clazz -> {
             try {
-                compositeOperators.put(Introspector.decapitalize(clazz.getSimpleName()), (Class<CompositeOperator>)clazz);
+                compositeOperators.put(Introspector.decapitalize(clazz.getSimpleName()), (Class<CompositeOperator>) clazz);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
