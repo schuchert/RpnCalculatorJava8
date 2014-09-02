@@ -16,7 +16,7 @@ public class OperatorFactory {
     }
 
     private void scanClasspath() {
-        Reflections reflections = new Reflections("com.shoe.operators");
+        Reflections reflections = new Reflections("com.shoe");
         handleOperatorRegistrars(reflections);
         handleCompositeOperators(reflections);
     }

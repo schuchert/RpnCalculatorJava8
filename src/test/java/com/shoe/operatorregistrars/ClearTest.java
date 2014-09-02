@@ -1,6 +1,8 @@
-package com.shoe.operators;
+package com.shoe.operatorregistrars;
 
 import com.shoe.calculator.RpnStack;
+import com.shoe.com.shoe.operatorregistrars.Clear;
+import com.shoe.operators.BaseOperatorTest;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;

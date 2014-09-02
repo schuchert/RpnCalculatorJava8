@@ -1,7 +1,9 @@
-package com.shoe.operators;
+package com.shoe.operatorregistrars;
 
 import com.shoe.calculator.Operator;
 import com.shoe.calculator.RpnStack;
+import com.shoe.com.shoe.operatorregistrars.GreaterThan;
+import com.shoe.operators.BaseOperatorTest;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,13 +12,13 @@ import java.math.BigDecimal;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class LessThanTest extends BaseOperatorTest {
+public class GreaterThanTest extends BaseOperatorTest {
 
     private Operator op;
 
     @Before
     public void init() {
-        op = new LessThan().get();
+        op = new GreaterThan().get();
     }
 
     @Override
@@ -25,10 +27,10 @@ public class LessThanTest extends BaseOperatorTest {
     }
 
     @Test
-    public void shouldBeOneForLessThan() {
+    public void shouldBeZeroForLessThan() {
         RpnStack values = stackOf(1, 2);
         op.accept(values);
-        assertThat(values.peek(), is(BigDecimal.ONE));
+        assertThat(values.peek(), is(BigDecimal.ZERO));
     }
 
     @Test
@@ -39,9 +41,9 @@ public class LessThanTest extends BaseOperatorTest {
     }
 
     @Test
-    public void shouldBeZeroForGreaterThan() {
+    public void shouldBeOneForGreaterThan() {
         RpnStack values = stackOf(2, 1);
         op.accept(values);
-        assertThat(values.peek(), is(BigDecimal.ZERO));
+        assertThat(values.peek(), is(BigDecimal.ONE));
     }
 }

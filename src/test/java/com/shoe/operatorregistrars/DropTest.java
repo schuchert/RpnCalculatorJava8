@@ -1,6 +1,8 @@
-package com.shoe.operators;
+package com.shoe.operatorregistrars;
 
 import com.shoe.calculator.RpnStack;
+import com.shoe.com.shoe.operatorregistrars.Drop;
+import com.shoe.operators.BaseOperatorTest;
 import org.junit.Test;
 
 import static com.shoe.calculator.TestUtilities.isBigDecimal;

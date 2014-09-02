@@ -1,4 +1,4 @@
-package com.shoe.operators;
+package com.shoe.com.shoe.operatorregistrars;
 
 import com.shoe.calculator.Operator;
 import com.shoe.calculator.OperatorRegistrar;
@@ -12,8 +12,6 @@ public class GreaterThan implements OperatorRegistrar {
 
     @Override
     public Operator get() {
-        return BinaryOperatorBuilder.build((lhs, rhs) -> {
-            return lhs.compareTo(rhs) > 0 ? BigDecimal.ONE : BigDecimal.ZERO;
-        });
+        return BinaryOperatorBuilder.build((lhs, rhs) -> lhs.compareTo(rhs) > 0 ? BigDecimal.ONE : BigDecimal.ZERO);
     }
 }

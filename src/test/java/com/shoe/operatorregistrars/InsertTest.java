@@ -1,7 +1,9 @@
-package com.shoe.operators;
+package com.shoe.operatorregistrars;
 
 import com.shoe.calculator.Operator;
 import com.shoe.calculator.RpnStack;
+import com.shoe.com.shoe.operatorregistrars.Insert;
+import com.shoe.operators.BaseOperatorTest;
 import org.junit.Before;
 import org.junit.Test;
 
