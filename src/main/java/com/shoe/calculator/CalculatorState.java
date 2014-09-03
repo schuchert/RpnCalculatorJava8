@@ -7,7 +7,7 @@ public interface CalculatorState {
 
     public void execute(String operatorName);
 
-    public void start(Calculator calculator);
+    public void start(CalculationContext context);
 
-    public void save(Calculator calculator, String name);
+    public void save(CalculationContext context, String name);
 }

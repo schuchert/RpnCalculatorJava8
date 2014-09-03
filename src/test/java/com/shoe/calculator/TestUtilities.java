@@ -17,6 +17,10 @@ public class TestUtilities {
         return is(BigDecimal.valueOf(value));
     }
 
+    public static void assertResultWas(RpnStack values, int value) {
+        assertThat(values.pop(), isBigDecimal(value));
+    }
+
     public static void assertResultWas(Calculator calculator, int value) {
         assertThat(calculator.view(), isBigDecimal(value));
         calculator.execute("drop");

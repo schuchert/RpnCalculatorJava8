@@ -25,12 +25,12 @@ public class Executing implements CalculatorState {
     }
 
     @Override
-    public void start(Calculator calculator) {
-        calculator.toProgrammingMode();
+    public void start(CalculationContext context) {
+        context.toProgrammingMode();
     }
 
     @Override
-    public void save(Calculator calculator, String name) {
+    public void save(CalculationContext context, String name) {
         factory.register(name, new PushValue(values.pop()));
     }
 }

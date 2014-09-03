@@ -1,7 +1,6 @@
 package com.shoe.operatorregistrars;
 
 import com.shoe.calculator.RpnStack;
-import com.shoe.com.shoe.operatorregistrars.Divide;
 import com.shoe.operators.BaseOperatorTest;
 import org.junit.Test;
 

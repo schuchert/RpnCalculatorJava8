@@ -3,7 +3,7 @@ package com.shoe.calculator;
 import java.math.BigDecimal;
 import java.util.stream.Stream;
 
-public class Calculator {
+public class Calculator implements CalculationContext {
     CalculatorState state;
     private OperatorFactory factory;
     private RpnStack values;
@@ -42,11 +42,11 @@ public class Calculator {
         state.save(this, operatorName);
     }
 
-    void toExecutionMode() {
+    public void toExecutionMode() {
         state = new Executing(values, factory);
     }
 
-    void toProgrammingMode() {
+    public void toProgrammingMode() {
         state = new Programming(factory);
     }
 }

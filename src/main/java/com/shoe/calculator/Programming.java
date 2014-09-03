@@ -29,19 +29,19 @@ public class Programming implements CalculatorState {
         } else if (op instanceof End) {
             blocks.pop();
         } else if (op instanceof Else) {
-            If theIf = (If) blocks.pop();
+            blocks.pop();
             blocks.push((Else) op);
         }
     }
 
     @Override
-    public void start(Calculator calculator) {
+    public void start(CalculationContext context) {
         throw new IllegalStateException("Start should not be called after start but before save");
     }
 
     @Override
-    public void save(Calculator calculator, String operatorName) {
+    public void save(CalculationContext context, String operatorName) {
         factory.register(operatorName, blocks.pop());
-        calculator.toExecutionMode();
+        context.toExecutionMode();
     }
 }

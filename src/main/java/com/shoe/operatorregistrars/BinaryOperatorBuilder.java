@@ -1,4 +1,4 @@
-package com.shoe.com.shoe.operatorregistrars;
+package com.shoe.operatorregistrars;
 
 import com.shoe.calculator.Operator;
 
